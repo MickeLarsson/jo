@@ -1,0 +1,42 @@
+
+.button {
+  clear: both;
+  display: block;
+  margin: 30px auto 0;
+  background: #15232D;
+  color: #fafafa;
+  padding: 12px 40px;
+  border-radius: 50px;
+  border: none;
+  // box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  font-size: 16px;
+  font-weight: bold;
+  -webkit-appearance: none;
+  outline: none;
+  @include transition(background-color 0.1s linear);
+  @include transition(transform 0.5s cubic-bezier(.87,-.41,.19,1.44), opacity 0.3s ease-in-out 0.1s);
+
+  &:not([disabled]) {
+    width: 200px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #1C252B;
+      color: #fefefe;
+    }
+  }
+
+  &[href] {
+    width: 200px;
+    background-color: #ff6600;
+
+    &:hover {
+      background-color: lighten(#ff6600, 5%);
+    }
+  }
+
+  &[disabled] {
+    opacity: 0;
+    @include transform(scale(0.1));
+  }
+}
