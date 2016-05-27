@@ -7,7 +7,7 @@ module.exports = {
   devtool: 'source-map',
   entry: [
     'webpack-hot-middleware/',
-    './src/reduxstagram'
+    './src/jo'
   ],
   output: {
     path: path.join(__dirname, 'dist'),

@@ -4,19 +4,15 @@ import { browserHistory } from 'react-router';
 
 import rootReducer from './reducers/index'
 
-import comments from './data/comments';
-import posts from './data/posts';
-
 const defaultState = {
-  posts,
-  comments
+  score: {one: { points: 0, games: 1 }, two: { points: 2, games: 2 }, gameover: false}
 };
 
 const enhancers = compose(
     window.devToolsExtension ? window.devToolsExtension() : (f) => f
   );
 
-const store = createStore(rootReducer, defaultState, enhancers);
+const store = createStore(rootReducer, enhancers);
 
 export const history = syncHistoryWithStore(browserHistory, store);
 

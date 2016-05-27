@@ -4,8 +4,7 @@ import { render } from 'react-dom';
 import css from './styles/styles.scss';
 
 import App from './components/App';
-import Single from './components/Single';
-import PhotoGrid from './components/PhotoGrid';
+import Scores from './components/Scores';
 
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import { Provider } from 'react-redux';
@@ -15,8 +14,7 @@ const router = (
 	<Provider store={store}>
 		<Router history={history}>
 			<Route path='/' component={App}>
-				<IndexRoute component={PhotoGrid}></IndexRoute>
-				<Route path='/view/:postId' component={Single}></Route>
+				<IndexRoute component={Scores}></IndexRoute>
 			</Route>
 		</Router>
 	</Provider>
