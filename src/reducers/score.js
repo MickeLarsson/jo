@@ -1,19 +1,24 @@
-const increment = (state, limits) => {
-  if (state.points < limits.gameGoesTo)
+const hasEnoughPointsToWin = (p, pointsToWin) => p >= pointsToWin - 1;
+
+const twoPointsDiff = (p1, p2) => {
+  return (p1 - p2) > 0;
+}
+
+const increment = (state, limits, otherPlayerPoints) => {
+  if (hasEnoughPointsToWin(state.points, limits.gameGoesTo) && twoPointsDiff(state.points, otherPlayerPoints)){
+    const games = state.games + 1;
     return {
       ...state,
-      points: state.points + 1
+      games,
+      points: 0,
+      winner: games === limits.gamesToWin
     };
+  }
 
-  state = {
-      ...state,
-      games: state.games + 1,
-      points: 0
-    };
-
-  state.winner = state.games === limits.gamesToWin;
-
-  return state;
+  return {
+    ...state,
+    points: state.points + 1
+  };
 }
 
 const decrement = (state, limits) => {
@@ -30,10 +35,10 @@ const decrement = (state, limits) => {
   };
 }
 
-const setScore = (state, action, limits) => {
+const setScore = (state, action, limits, otherPlayerPoints) => {
   switch(action.type) {
     case 'INCREMENT':
-      return increment(state, limits);
+      return increment(state, limits, otherPlayerPoints);
     case 'DECREMENT':
       return decrement(state, limits);
     default:
@@ -42,6 +47,9 @@ const setScore = (state, action, limits) => {
 }
 
 const shouldFlipServer = (state) => {
+  if (state.one.points === state.limits.points - 1 || state.two.points === state.limits.points - 1)
+    return true;
+
   return (state.one.points + state.two.points) % 2 === 0;
 }
 
@@ -60,14 +68,17 @@ const setServer = (state) => {
 
 const defaultScore = { points: 0, games: 0, winner: false };
 const defLimits = { gameGoesTo: 5, gamesToWin: 2 };
+const defState = {one: defaultScore, two: defaultScore, limits: defLimits, server: 'one' };
 
-const score = (state = {one: defaultScore, two: defaultScore, limits: defLimits, server: 'one' }, action) => {
+export const getDefState = () => defState;
+
+const score = (state = defState, action) => {
   if (state.one.winner || state.two.winner)
     return state;
 
   state = {
     ...state,
-    [action.player]: setScore(state[action.player], action, state.limits)
+    [action.player]: setScore(state[action.player], action, state.limits, state.two.points || 0)
   };
 
   return setServer(state);

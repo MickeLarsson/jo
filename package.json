@@ -5,7 +5,7 @@
   "scripts": {
     "build:webpack": "NODE_ENV=production webpack --config webpack.config.prod.js",
     "build": "npm run clean && npm run build:webpack",
-    "test": "NODE_ENV=production mocha './tests/**/*.spec.js' --compilers js:babel-core/register",
+    "test": "npm build && babel-node src/tests/index.js | faucet",
     "clean": "rimraf dist",
     "start": "node devServer.js",
     "tunnel": "browser-sync start --proxy localhost:7770 --tunnel wesbos"
@@ -53,13 +53,17 @@
     "webpack-hot-middleware": "^2.10.0"
   },
   "devDependencies": {
+    "babel-cli": "^6.9.0",
+    "deep-freeze": "0.0.1",
     "expect": "^1.18.0",
     "expect-jsx": "^2.5.1",
+    "faucet": "0.0.1",
     "mocha": "^2.4.5",
     "neat": "^1.2.2",
     "node-sass": "^3.7.0",
     "react-addons-test-utils": "^15.0.2",
     "sass-loader": "^3.2.0",
+    "tape": "^4.5.1",
     "webpack": "^1.13.1"
   }
 }
