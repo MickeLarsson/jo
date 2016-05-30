@@ -66,6 +66,13 @@ const setServer = (state) => {
   }
 }
 
+const otherPlayer = (pl) => {
+  if (pl === 'one')
+    return 'two';
+
+  return 'one';
+}
+
 const defaultScore = { points: 0, games: 0, winner: false };
 const defLimits = { gameGoesTo: 5, gamesToWin: 2 };
 const defState = {one: defaultScore, two: defaultScore, limits: defLimits, server: 'one' };
@@ -76,9 +83,11 @@ const score = (state = defState, action) => {
   if (state.one.winner || state.two.winner)
     return state;
 
+  const otherPl = otherPlayer(action.player);
+
   state = {
     ...state,
-    [action.player]: setScore(state[action.player], action, state.limits, state.two.points || 0)
+    [action.player]: setScore(state[action.player], action, state.limits, state[otherPl].points || 0)
   };
 
   return setServer(state);
