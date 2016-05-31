@@ -46,35 +46,30 @@ const setScore = (state, action, limits, otherPlayerPoints) => {
   }
 }
 
-const shouldFlipOnEveryPoint = () => onePoints >= gameGoesTo - 1 && twoPoints >= gameGoesTo - 1
+const shouldFlipOnEveryPoint = (onePoints, twoPoints, gameGoesTo) =>
+  onePoints >= gameGoesTo - 1 && twoPoints >= gameGoesTo - 1;
+
+const flipOnEveryOtherPoint = (onePoints, twoPoints) =>
+  (onePoints + twoPoints) % 2 === 0;
 
 const shouldFlipServer = (state) => {
-  const onePoints = state.one.points;
-  const twoPoints = state.two.points;
-  const gameGoesTo = state.limits.gameGoesTo;
-
-  if (shouldFlipOnEveryPoint())
-    return true;
-
-  return (onePoints + twoPoints) % 2 === 0;
+  return shouldFlipOnEveryPoint(state.one.points, state.two.points, state.limits.gameGoesTo)
+         || flipOnEveryOtherPoint(state.one.points, state.two.points);
 }
 
 const setServer = (state) => {
-  let server = shouldFlipServer(state)
-                ? otherPlayer(state.server)
-                : state.server;
-
   return {
     ...state,
-    server
+    server: shouldFlipServer(state)
+                ? otherPlayer(state.server)
+                : state.server
   }
 }
 
 const otherPlayer = (pl) => {
-  if (pl === 'one')
-    return 'two';
-
-  return 'one';
+  return pl === 'one'
+      ? 'two'
+      : 'one';
 }
 
 const defaultScore = { points: 0, games: 0, winner: false };
@@ -89,12 +84,12 @@ const score = (state = defState, action) => {
 
   const otherPl = otherPlayer(action.player);
 
-  state = {
+  const newState = {
     ...state,
     [action.player]: setScore(state[action.player], action, state.limits, state[otherPl].points || 0)
   };
 
-  return setServer(state);
+  return setServer(newState);
 }
 
 export default score

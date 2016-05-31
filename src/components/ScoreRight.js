@@ -1,13 +1,13 @@
 import React from 'react';
+import Points from './points';
+import Games from './games';
+import ScoreControls from './scorecontrols';
 
 const ScoreRight = (props) => (
   <div className="score scoreR">
-    <div className="points pR"><span className="number">{props.score.two.points}</span></div>
-    <div className="games pR"><span className="number">{props.score.two.games}</span></div>
-    <div className="scoreControls">
-      <div className="scoreControls__modifier--add" onClick={() => props.increment('two')}>+</div>
-      <div className="scoreControls__modifier--subtract" onClick={() => props.decrement('two')}>-</div>
-    </div>
+    <Points points={props.score.two.points} />
+    <Games games={props.score.two.games} />
+    <ScoreControls player={'two'} { ...props } />
   </div>
 );
 
