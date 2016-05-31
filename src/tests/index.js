@@ -85,7 +85,7 @@ test('You have to win by two points', (assert) => {
   assert.end();
 });
 
-test('Serve is alternated before every third point', (assert) => {
+test('Serve is alternated before every other point', (assert) => {
   var initial = {
     ...getDefState(),
     server: 'two'
