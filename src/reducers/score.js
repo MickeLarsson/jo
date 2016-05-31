@@ -47,22 +47,26 @@ const setScore = (state, action, limits, otherPlayerPoints) => {
 }
 
 const shouldFlipServer = (state) => {
-  if (state.one.points === state.limits.points - 1 || state.two.points === state.limits.points - 1)
+  const p1 = state.one.points;
+  const p2 = state.two.points;
+  const pLim = state.limits.gameGoesTo;
+
+  console.log(`p1: ${p1}, p2: ${p2}, lim: ${pLim}`);
+
+  if (p1 >= pLim - 1 && p2 >= pLim - 1)
     return true;
 
-  return (state.one.points + state.two.points) % 2 === 0;
+  return (p1 + p2) % 2 === 0;
 }
 
-const servers = ['one', 'two'];
-let i = 0;
-
 const setServer = (state) => {
-  if (shouldFlipServer(state))
-    i = i + 1;
+  let server = shouldFlipServer(state)
+                ? otherPlayer(state.server)
+                : state.server;
 
   return {
     ...state,
-    server: servers[i % 2]
+    server
   }
 }
 
@@ -74,7 +78,7 @@ const otherPlayer = (pl) => {
 }
 
 const defaultScore = { points: 0, games: 0, winner: false };
-const defLimits = { gameGoesTo: 5, gamesToWin: 2 };
+const defLimits = { gameGoesTo: 11, gamesToWin: 2 };
 const defState = {one: defaultScore, two: defaultScore, limits: defLimits, server: 'one' };
 
 export const getDefState = () => defState;

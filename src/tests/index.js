@@ -84,3 +84,46 @@ test('You have to win by two points', (assert) => {
   assert.deepEqual(actual.one, expected.one);
   assert.end();
 });
+
+test('Serve is alternated before every third point', (assert) => {
+  var initial = {
+    ...getDefState(),
+    server: 'two'
+  };
+
+  const first = score(initial, {type: 'INCREMENT', player: 'one'});
+  assert.equal(first.server, 'two');
+
+  const second = score(first, {type: 'INCREMENT', player: 'one'});
+  assert.equal(second.server, 'one');
+
+  assert.end();
+});
+
+test('Serve is alternated before every point when you have to win by two', (assert) => {
+  const state = getDefState();
+  var initial = {
+    ...state,
+    one: {
+      ...state.one,
+      points: 9
+    },
+    two: {
+      ...state.two,
+      points: 10
+    },
+    limits: {
+      ...state.limits,
+      gameGoesTo: 11
+    },
+    server: 'two'
+  };
+
+  const first = score(initial, {type: 'INCREMENT', player: 'one'});
+  assert.equal(first.server, 'one', 'should have switched after first point');
+
+  const second = score(first, {type: 'INCREMENT', player: 'two'});
+  assert.equal(second.server, 'two', 'should have switched after second point');
+
+  assert.end();
+});
