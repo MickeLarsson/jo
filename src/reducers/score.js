@@ -72,13 +72,30 @@ const otherPlayer = (pl) => {
       : 'one';
 }
 
-const defaultScore = { points: 0, games: 0, winner: false };
+const setName = (state, pl, name) => {
+  return {
+    ...state,
+    [pl]: {
+      ...state[pl],
+      name
+    }
+  };
+}
+
+const defaultScore = { points: 0, games: 0, winner: false, name: '' };
 const defLimits = { gameGoesTo: 11, gamesToWin: 2 };
 const defState = {one: defaultScore, two: defaultScore, limits: defLimits, server: 'one' };
 
 export const getDefState = () => defState;
 
 const score = (state = defState, action) => {
+  switch (action.type) {
+    case 'SET_NAME': {
+      return setName(state, action.player, action.name);
+    }
+
+  }
+
   if (state.one.winner || state.two.winner)
     return state;
 

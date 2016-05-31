@@ -8,7 +8,6 @@ const ScoreLeft = (props) => (
     <Games games={props.score.one.games} />
     <Points points={props.score.one.points} />
     <ScoreControls player={'one'} { ...props } />
-    <div>{props.score.server}</div>
   </div>
 );
 

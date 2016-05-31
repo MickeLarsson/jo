@@ -11,3 +11,11 @@ export const decrement = (pl) => {
     player: pl
   }
 }
+
+export const setName = (player, name) => {
+  return {
+    type: 'SET_NAME',
+    player,
+    name
+  }
+}

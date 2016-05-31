@@ -5,10 +5,10 @@ import score, { getDefState } from '../reducers/score';
 test('Can increase score', (assert) => {
   let state = getDefState();
 
-  const expected = { one: { points: 1, games: 0, winner: false } };
+  const expected = { one: { points: 1 } };
   const actual = score(state, {type: 'INCREMENT', player: 'one'});
 
-  assert.deepEqual(actual.one, expected.one);
+  assert.deepEqual(actual.one.points, expected.one.points);
   assert.end();
 });
 
@@ -26,7 +26,7 @@ test('When reaching required points for game, game is increased and points are s
     }
   };
 
-  const expected = { one: { points: 0, games: 1, winner: false } };
+  const expected = { one: { ...defState.one, points: 0, games: 1} };
   const actual = score(state, {type: 'INCREMENT', player: 'one'});
 
   assert.deepEqual(actual.one, expected.one);
@@ -49,7 +49,7 @@ test('When reaching required games for match, game is increased and points are s
     }
   };
 
-  const expected = { one: { points: 0, games: 2, winner: true }};
+  const expected = { one: { ...defState.one, points: 0, games: 2, winner: true }};
   const actual = score(state, {type: 'INCREMENT', player: 'one'});
 
   assert.deepEqual(actual.one, expected.one);
@@ -75,8 +75,7 @@ test('You have to win by two points', (assert) => {
   };
 
   const expected = {
-    one: { points: 5, games: 0, winner: false },
-    two: { points: 4, games: 0, winner: false }
+    one: { ...defState.one, points: 5 }
   };
 
   const actual = score(state, {type: 'INCREMENT', player: 'one'});
