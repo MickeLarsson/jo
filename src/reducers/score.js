@@ -46,17 +46,17 @@ const setScore = (state, action, limits, otherPlayerPoints) => {
   }
 }
 
+const shouldFlipOnEveryPoint = () => onePoints >= gameGoesTo - 1 && twoPoints >= gameGoesTo - 1
+
 const shouldFlipServer = (state) => {
-  const p1 = state.one.points;
-  const p2 = state.two.points;
-  const pLim = state.limits.gameGoesTo;
+  const onePoints = state.one.points;
+  const twoPoints = state.two.points;
+  const gameGoesTo = state.limits.gameGoesTo;
 
-  console.log(`p1: ${p1}, p2: ${p2}, lim: ${pLim}`);
-
-  if (p1 >= pLim - 1 && p2 >= pLim - 1)
+  if (shouldFlipOnEveryPoint())
     return true;
 
-  return (p1 + p2) % 2 === 0;
+  return (onePoints + twoPoints) % 2 === 0;
 }
 
 const setServer = (state) => {
