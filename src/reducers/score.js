@@ -83,7 +83,7 @@ const setName = (state, pl, name) => {
 }
 
 const defaultScore = { points: 0, games: 0, winner: false, name: '' };
-const defLimits = { gameGoesTo: 11, gamesToWin: 2 };
+const defLimits = { gameGoesTo: 3, gamesToWin: 7 };
 const defState = {one: defaultScore, two: defaultScore, limits: defLimits, server: 'one' };
 
 export const getDefState = () => defState;
