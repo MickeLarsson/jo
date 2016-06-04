@@ -19,3 +19,17 @@ export const setName = (player, name) => {
     name
   }
 }
+
+export const getPeople = () => {
+  return {
+    type: 'GET_PEOPLE'
+  }
+}
+
+export const selectPlayer = (label, pl) => {
+  return {
+    type: 'SELECT_PLAYER',
+    label,
+    pl
+  }
+}

@@ -126,3 +126,9 @@ test('Serve is alternated before every point when you have to win by two', (asse
 
   assert.end();
 });
+
+test('Serve is alternated on every game', (assert) => {
+  assert.fail();
+
+  assert.end();
+});

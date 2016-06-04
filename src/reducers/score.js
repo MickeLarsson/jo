@@ -83,7 +83,7 @@ const setName = (state, pl, name) => {
 }
 
 const defaultScore = { points: 0, games: 0, winner: false, name: '' };
-const defLimits = { gameGoesTo: 3, gamesToWin: 7 };
+const defLimits = { gameGoesTo: 3, gamesToWin: 2 };
 const defState = {one: defaultScore, two: defaultScore, limits: defLimits, server: 'one' };
 
 export const getDefState = () => defState;
@@ -92,6 +92,10 @@ const score = (state = defState, action) => {
   switch (action.type) {
     case 'SET_NAME': {
       return setName(state, action.player, action.name);
+    }
+    case 'SELECT_PLAYER': {
+      console.log('select player ' + action.pl.id);
+      return state;
     }
 
   }
@@ -110,3 +114,5 @@ const score = (state = defState, action) => {
 }
 
 export default score
+
+export const getWinner = (state) => score.one.winner ? 'one' : 'two'
