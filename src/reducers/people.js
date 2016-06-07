@@ -12,4 +12,4 @@ const people = (state = [], action) => {
 export default people;
 
 export const getPerson = (state, id) =>
-  state.find((x) => x.id === id);
+  state.find((x) => x.id === id) || {first: '', last: '', id: ''};

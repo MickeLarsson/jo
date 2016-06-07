@@ -84,6 +84,12 @@ test('You have to win by two points', (assert) => {
   assert.end();
 });
 
+test('The points of the loser is set to 0', (assert) => {
+  assert.fail();
+
+  assert.end();
+});
+
 test('Serve is alternated before every other point', (assert) => {
   var initial = {
     ...getDefState(),

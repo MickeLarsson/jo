@@ -90,12 +90,14 @@ export const getDefState = () => defState;
 
 const score = (state = defState, action) => {
   switch (action.type) {
-    case 'SET_NAME': {
-      return setName(state, action.player, action.name);
-    }
     case 'SELECT_PLAYER': {
-      console.log('select player ' + action.pl.id);
-      return state;
+      return {
+        ...state,
+        [action.label]: {
+          ...state[action.label],
+          id: action.id
+        }
+      };
     }
 
   }

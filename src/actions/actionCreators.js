@@ -12,24 +12,16 @@ export const decrement = (pl) => {
   }
 }
 
-export const setName = (player, name) => {
-  return {
-    type: 'SET_NAME',
-    player,
-    name
-  }
-}
-
 export const getPeople = () => {
   return {
     type: 'GET_PEOPLE'
   }
 }
 
-export const selectPlayer = (label, pl) => {
+export const selectPlayer = (id, label) => {
   return {
     type: 'SELECT_PLAYER',
     label,
-    pl
+    id
   }
 }
