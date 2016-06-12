@@ -26,7 +26,7 @@ const store = createStore(rootReducer, persistedPeople, enhancers);
 
 store.subscribe(() => {
   //push score to log server
-  const score = store.getState().score;
+  const score = store.getState().match.score;
   const { one, two } = score;
   console.log(`(${one.games}) ${one.points}:${two.points} (${two.games})`);
 });

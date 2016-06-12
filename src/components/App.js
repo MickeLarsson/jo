@@ -5,7 +5,7 @@ import NewGame from './NewGame';
 
 const mapStateToProps = (state) => {
 	return {
-    score: state.score,
+    match: state.match,
     people: state.people
 	}
 }

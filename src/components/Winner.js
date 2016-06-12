@@ -2,13 +2,22 @@ import React from 'react';
 import { getPerson } from '../reducers/people';
 
 
-const getScore = (props) =>
-    props.score.one.winner
-      ? `${props.score.one.games}-${props.score.two.games}`
-      : `${props.score.two.games}-${props.score.one.games}`
+const getScore = (props) => {
+    if (props.match.winner === 'none')
+      return '';
+
+    const score = props.match.score;
+    const winner = props.match.winner || 'one';
+    const looser = props.match.winner === 'one' ? 'two' : 'one';
+    return score ? `${score[winner].games}-${score[looser].games}` : '';
+}
 
 const getWinner = (props) => {
-  const winner = getPerson(props.people, props.score.one.winner ? props.params.one : props.params.two);
+  if (props.match.winner === 'none') {
+    return {name: '', score: ''};
+  }
+
+  const winner = getPerson(props.people, props.match.players[props.match.winner].id);
 
   return {
     name: `${winner.first} ${winner.last}`,
@@ -18,7 +27,7 @@ const getWinner = (props) => {
 
 const Winner = (props) => {
   const winner = getWinner(props);
-  const gameOver = props.score.one.winner || props.score.two.winner || false;
+  const gameOver = props.match.winner !== 'none';
 
   return (
     <div id="winner" className={ gameOver ? 'winner show animate' : 'winner' }>

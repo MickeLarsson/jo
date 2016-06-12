@@ -9,7 +9,7 @@ import Winner from './winner';
 import { getPerson } from '../reducers/people';
 
 const mapStateToProps = (state) => ({
-  score: state.score,
+  match: state.match,
   people: state.people
 });
 
@@ -23,9 +23,9 @@ const Game = (props) => {
   return (
     <div>
       <div id="names" className="playersPresentation">
-        <div className="name pL">{ props.score.server === 'one' ? '\u261B' : ''} {one.first} {one.last} </div>
+        <div className="name pL">{ props.match.serve.current === 'one' ? '\u261B' : ''} {one.first} {one.last} </div>
         <div className="vs"><span>vs</span></div>
-        <div className="name pR"> {two.first} {two.last} { props.score.server === 'two' ? '\u261A' : '' }</div>
+        <div className="name pR"> {two.first} {two.last} { props.match.serve.current === 'two' ? '\u261A' : '' }</div>
       </div>
 
       <div className="scores">

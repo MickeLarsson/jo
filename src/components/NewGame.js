@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router';
 
-const Player = (props) => {
-  const otherLabel = props.side === 'one' ? 'two' : 'one';
-  const isMirrorOfSelected = props.score[otherLabel].id === props.p.id;
-  const isSelected = props.score[props.side].id === props.p.id;
+const Player = ({match, side, p, selectPlayer}) => {
+  const otherLabel = side === 'one' ? 'two' : 'one';
+  const isMirrorOfSelected = match.players[otherLabel].id === p.id;
+  const isSelected = match.players[side].id === p.id;
 
   let classnames = ['playerList__player'];
 
@@ -15,14 +15,14 @@ const Player = (props) => {
     classnames.push('selected');
 
   return (
-    <div className={classnames.join(' ')} id={props.p.id} >
-      <input onClick={() => props.selectPlayer(props.p.id, props.side)}
+    <div className={classnames.join(' ')} id={p.id} >
+      <input onClick={() => selectPlayer(p.id, side)}
               className="playerRadio disabled"
               type="radio"
-              id={`${props.p.id}-${props.side}`}
+              id={`${p.id}-${side}`}
               disabled={isMirrorOfSelected}
               />
-      <label htmlFor={`${props.p.id}-${props.side}`}>{props.p.first} {props.p.last}</label>
+      <label htmlFor={`${p.id}-${side}`}>{p.first} {p.last}</label>
     </div>
 )};
 
@@ -40,7 +40,7 @@ const NewGame = (props) => (
           <PlayerList id='pL' side='one' {...props } />
           <PlayerList id='pR' side='two' {...props } />
         </div>
-        <Link to={`game/${props.score.one.id}/${props.score.two.id}`} className='button' >Let's Go!</Link>
+        <Link to={`game/${props.match.players.one.id}/${props.match.players.two.id}`} className='button' >Let's Go!</Link>
     </div>
   </div>
 );

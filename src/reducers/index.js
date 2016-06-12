@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
 
-import score from './score';
+import match from './match';
 import people from './people';
 
-const rootReducer = combineReducers({ score, people, routing: routerReducer});
+const rootReducer = combineReducers({ match, people, routing: routerReducer});
 
 export default rootReducer;
