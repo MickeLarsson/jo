@@ -32,17 +32,19 @@ const PlayerList = (props) => (
   </div>
 );
 
-const NewGame = (props) => (
-  <div id="app">
-    <div className="container">
-      <h2 className="textAlign--center">Select players</h2>
-        <div className="playerLists">
-          <PlayerList id='pL' side='one' {...props } />
-          <PlayerList id='pR' side='two' {...props } />
-        </div>
-        <Link to={`game/${props.match.players.one.id}/${props.match.players.two.id}`} className='button' >Let's Go!</Link>
+const NewGame = (props) => {
+  const gotPlayers = (props.match.players.one.id && props.match.players.two.id) || false;
+  return (
+    <div id="app">
+      <div className="container">
+        <h2 className="textAlign--center">Select players</h2>
+          <div className="playerLists">
+            <PlayerList id='pL' side='one' {...props } />
+            <PlayerList id='pR' side='two' {...props } />
+          </div>
+          <Link disabled={!gotPlayers} to={`game/${props.match.players.one.id}/${props.match.players.two.id}`} className='button' >Let's Go!</Link>
+      </div>
     </div>
-  </div>
-);
+)};
 
 export default NewGame;

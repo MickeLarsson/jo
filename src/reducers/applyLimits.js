@@ -23,11 +23,9 @@ const limitScore = (score, limits, pl) => {
   return score[pl];
 }
 
-const applyLimits = (score, limits) => {
-  return {
-    one: limitScore(score, limits, 'one'),
-    two: limitScore(score, limits, 'two')
-  }
-}
+const applyLimits = (score, limits) => ({
+  one: limitScore(score, limits, 'one'),
+  two: limitScore(score, limits, 'two')
+})
 
 export default applyLimits;

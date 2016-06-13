@@ -38,21 +38,19 @@ const defState = {
 
 export const getDefState = () => defState;
 
-const selectPlayer = (state, {label, id}) => {
-  return {
-        ...state,
-        players: {
-          ...state.players,
-          [label]: {
-            ...state.players[label],
-            id
-          }
-        }
-      };
-}
+const selectPlayer = (state, {label, id}) => ({
+    ...state,
+    players: {
+      ...state.players,
+      [label]: {
+        ...state.players[label],
+        id
+      }
+    }
+})
 
 const match = (state = defState, action) => {
-  console.log(action);
+
   switch (action.type) {
     case 'INCREMENT':
     case 'DECREMENT': {

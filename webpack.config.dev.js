@@ -6,7 +6,7 @@ var bourbon = require('bourbon-neat').includePaths;
 module.exports = {
   devtool: 'source-map',
   entry: [
-    'webpack-hot-middleware/client',
+    'webpack/hot/dev-server',
     './src/jo'
   ],
   output: {
