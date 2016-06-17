@@ -51,6 +51,25 @@ test('Can decrease score', (assert) => {
   assert.end();
 });
 
+test('Can decrease to negative score', (assert) => {
+  const state = {
+    ...getDefState(),
+    score: {
+      ...getDefState().score,
+      one: {
+        games: 0,
+        points: 0
+      }
+    }
+  };
+
+  const expected = { one: { points: 0 } };
+  const actual = match(state, {type: 'DECREMENT', player: 'one'});
+
+  assert.deepEqual(actual.score.one.points, expected.one.points);
+  assert.end();
+});
+
 test('When reaching required points for game, game is increased and points for both players are set to zero', (assert) => {
   const defState = getDefState();
   const state = {
@@ -196,30 +215,16 @@ test('Serve is alternated before every point when you have to win by two', (asse
   assert.end();
 });
 
-test('Serve is alternated on every game', (assert) => {
-  const state = {
-    ...getDefState(),
-    limits: {
-      ...getDefState().limits,
-      gameGoesTo: 3
-    }
-  }
-
-  let tempState = getDefState();
-  for (var i = 0; i < 5; i++) {
-    tempState = match(tempState, {type: 'INCREMENT', player: 'one'});
-  }
-
-  assert.equal(tempState.serve.current, 'two');
-  assert.end();
-});
-
 test('Can play full game', (assert) => {
   const state = {
     ...getDefState(),
     limits: {
       gamesToWin: 2,
       gameGoesTo: 3
+    },
+    serve: {
+      ...getDefState().serve,
+      initial: 'one'
     }
   }
 
