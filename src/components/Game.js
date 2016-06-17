@@ -28,7 +28,8 @@ const Game = (props) => {
         <div className="wrap">
           <div className="text">
             <h2><button onClick={() => props.setServer('l')}>{'\u261B'}</button> Decide who will begin to serve <button onClick={() => props.setServer('r')}>{'\u261A'}</button></h2>
-            Then press the button on your left
+            <p>Then press the button on your left</p>
+            <p>(or click on the hand)</p>
           </div>
         </div>
       </div>
