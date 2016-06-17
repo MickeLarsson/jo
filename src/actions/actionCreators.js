@@ -25,3 +25,10 @@ export const selectPlayer = (id, label) => {
     id
   }
 }
+
+export const setServer = (side) => {
+  return {
+    type: 'SET_SERVER',
+    side
+  }
+}

@@ -165,10 +165,33 @@
 }
 
 #chooseServer {
-  display: none;
   position: fixed;
-  top: 50;
+  top: 20px;
+  right: 20px;
+  bottom: 20px;
+  left: 20px;
   background: #fefefe;
+  z-index: 99999;
+  text-align: center;
+
+  .wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+
+  &.hide {
+    display: none;
+  }
+
+  button {
+    -webkit-appearance: none;
+    outline: none;
+    border: none;
+    font-size: 1.25em;
+    background: transparent;
+  }
 }
 
 .winner {

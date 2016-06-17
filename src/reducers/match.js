@@ -7,7 +7,7 @@ import applyLimits from './applylimits';
 const defState = {
   winner: 'none',
   serve: {
-    initial: 'one',
+    initial: '',
     current: 'one'
   },
   limits: {
@@ -49,8 +49,17 @@ const selectPlayer = (state, {label, id}) => ({
     }
 })
 
-const match = (state = defState, action) => {
+const getPlayerBySide = (side) => {
+  if (side === 'l')
+    return 'one';
 
+  if (side === 'r')
+    return 'two';
+
+  return 'one';
+}
+
+const match = (state = defState, action) => {
   switch (action.type) {
     case 'INCREMENT':
     case 'DECREMENT': {
@@ -65,6 +74,16 @@ const match = (state = defState, action) => {
     }
     case 'SELECT_PLAYER': {
       return selectPlayer(state, action)
+    }
+    case 'SET_SERVER': {
+      return {
+        ...state,
+        serve: {
+          ...state.serve,
+          initial: getPlayerBySide(action.side),
+          current: getPlayerBySide(action.side),
+        }
+      }
     }
     default:
       return state;

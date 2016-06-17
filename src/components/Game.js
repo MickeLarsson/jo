@@ -20,8 +20,19 @@ const Game = (props) => {
   const one = getPerson(props.people, props.params.one);
   const two = getPerson(props.people, props.params.two);
 
+  const c = props.match.serve.initial === '' ? '' : 'hide';
+
   return (
     <div>
+      <div id="chooseServer" className={c}>
+        <div className="wrap">
+          <div className="text">
+            <h2><button onClick={() => props.setServer('l')}>{'\u261B'}</button> Decide who will begin to serve <button onClick={() => props.setServer('r')}>{'\u261A'}</button></h2>
+            Then press the button on your left
+          </div>
+        </div>
+      </div>
+
       <div id="names" className="playersPresentation">
         <div className="name pL">{ props.match.serve.current === 'one' ? '\u261B' : ''} {one.first} {one.last} </div>
         <div className="vs"><span>vs</span></div>
@@ -34,7 +45,6 @@ const Game = (props) => {
       </div>
 
       <Winner {...props} />
-
     </div>
 )};
 
