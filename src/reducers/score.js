@@ -25,7 +25,7 @@ const score = (state = defState, action) => {
         ...state,
         [action.player]: {
           ...state[action.player],
-          points: state[action.player].points - 1
+          points: Math.max(state[action.player].points - 1, 0)
         }
       }
   }
