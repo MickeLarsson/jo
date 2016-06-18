@@ -5,7 +5,7 @@
   "scripts": {
     "build:webpack": "NODE_ENV=production webpack --config webpack.config.prod.js",
     "build": "npm run clean && npm run build:webpack",
-    "test": "npm build && babel-node src/tests/index.js | faucet",
+    "test": "npm build && tape -r babel-register src/tests/*.js| faucet",
     "clean": "rimraf dist",
     "start": "node devServer.js",
     "tunnel": "browser-sync start --proxy localhost:7770 --tunnel wesbos"
