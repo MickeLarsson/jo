@@ -3,6 +3,7 @@ import score from './score';
 import winning from './winning';
 import getServer from './serve';
 import applyLimits from './applylimits';
+import getPositions from './player_position';
 
 const defState = {
   winner: 'none',
@@ -27,12 +28,14 @@ const defState = {
   players: {
     one: {
       id: null,
-      position: 'l'
     },
     two: {
       id: null,
-      position: 'r'
     }
+  },
+  position: {
+    l: 'one',
+    r: 'two'
   }
 };
 
@@ -59,6 +62,8 @@ const getPlayerBySide = (side) => {
   return 'one';
 }
 
+
+
 const match = (state = defState, action) => {
   switch (action.type) {
     case 'INCREMENT':
@@ -69,7 +74,8 @@ const match = (state = defState, action) => {
         ...state,
         score: scoreWithLimits,
         serve: getServer(scoreWithLimits, state.serve, state.limits),
-        winner: winning(scoreWithLimits, state.limits)
+        winner: winning(scoreWithLimits, state.limits),
+        position: getPositions(scoreWithLimits, state.position)
       };
     }
     case 'SELECT_PLAYER': {

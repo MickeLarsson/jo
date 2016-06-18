@@ -5,9 +5,9 @@ import ScoreControls from './scorecontrols';
 
 const ScoreRight = (props) => (
   <div className="score scoreR">
-    <Points points={props.match.score.two.points} />
-    <Games games={props.match.score.two.games} />
-    <ScoreControls player={'two'} { ...props } />
+    <Points points={props.match.score[props.match.position.r].points} />
+    <Games games={props.match.score[props.match.position.r].games} />
+    <ScoreControls player={props.match.position.r} { ...props } />
   </div>
 );
 

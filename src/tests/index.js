@@ -1,5 +1,4 @@
 import test from 'tape';
-import deepFreeze from 'deep-freeze';
 import match, { getDefState } from '../reducers/match';
 
 test('Can increase score', (assert) => {
