@@ -18,6 +18,7 @@ const mapDispatchToProps = (dispatch) =>
 
 const Game = (props) => {
   const left = getPerson(props.people, props.params[props.match.position.l]);
+  console.log(left);
   const right = getPerson(props.people, props.params[props.match.position.r]);
 
   const c = props.match.serve.initial === '' ? '' : 'hide';
@@ -35,9 +36,9 @@ const Game = (props) => {
       </div>
 
       <div id="names" className="playersPresentation">
-        <div className="name pL">{ props.match.serve.current === 'left' ? '\u261B' : ''} {left.first} {left.last} </div>
+        <div className="name pL">{ props.match.serve.current === 'one' ? '\u261B' : ''} {left.first} {left.last} </div>
         <div className="vs"><span>vs</span></div>
-        <div className="name pR"> {right.first} {right.last} { props.match.serve.current === 'right' ? '\u261A' : '' }</div>
+        <div className="name pR"> {right.first} {right.last} { props.match.serve.current === 'two' ? '\u261A' : '' }</div>
       </div>
 
       <div className="scores">
