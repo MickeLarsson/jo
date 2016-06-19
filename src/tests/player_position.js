@@ -16,7 +16,7 @@ test('Players switches side on new game', (assert) => {
       }
     }
   }
-  const actual = match(state, {type: 'INCREMENT', player: 'one'});
+  const actual = match(state, {type: 'INCREMENT', side: 'l'});
 
   assert.deepEqual(actual.position.r, 'one');
   assert.end();
@@ -37,7 +37,7 @@ test('Only switches side on new game', (assert) => {
       }
     },
   }
-  const actual = match(state, {type: 'INCREMENT', player: 'one'});
+  const actual = match(state, {type: 'INCREMENT', side: 'l'});
 
   assert.deepEqual(actual.position.l, 'one');
   assert.end();

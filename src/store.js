@@ -1,4 +1,4 @@
-import { createStore, compose } from 'redux';
+import { createStore, compose, applyMiddleware } from 'redux';
 import { syncHistoryWithStore } from 'react-router-redux';
 import { browserHistory } from 'react-router';
 
@@ -6,7 +6,14 @@ import rootReducer from './reducers/index'
 import { getPeople } from './actions/actionCreators';
 import people from './data/people';
 
+import createSocketIoMiddleware from 'redux-socket.io';
+import io from 'socket.io-client';
+let socket = io('http://localhost:7771');
+let socketIoMiddleware = createSocketIoMiddleware(socket, 'server/');
+
+
 const enhancers = compose(
+    applyMiddleware(socketIoMiddleware),
     window.devToolsExtension ? window.devToolsExtension() : (f) => f
   );
 

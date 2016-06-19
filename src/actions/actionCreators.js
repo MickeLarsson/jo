@@ -1,14 +1,15 @@
-export const increment = (pl) => {
+export const increment = (side) => {
+  console.log('inc ' + side);
   return {
     type: 'INCREMENT',
-    player: pl
+    side
   }
 }
 
-export const decrement = (pl) => {
+export const decrement = (side) => {
   return {
     type: 'DECREMENT',
-    player: pl
+    side
   }
 }
 

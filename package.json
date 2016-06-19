@@ -44,6 +44,7 @@
     "react-transform-hmr": "^1.0.4",
     "redbox-react": "^1.2.3",
     "redux": "^3.5.2",
+    "redux-socket.io": "^1.2.0",
     "rimraf": "^2.5.2",
     "socket.io": "^1.4.6",
     "socket.io-client": "^1.4.6",

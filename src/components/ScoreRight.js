@@ -7,7 +7,7 @@ const ScoreRight = (props) => (
   <div className="score scoreR">
     <Points points={props.match.score[props.match.position.r].points} />
     <Games games={props.match.score[props.match.position.r].games} />
-    <ScoreControls player={props.match.position.r} { ...props } />
+    <ScoreControls side='r' { ...props } />
   </div>
 );
 

@@ -62,13 +62,11 @@ const getPlayerBySide = (side) => {
   return 'one';
 }
 
-
-
 const match = (state = defState, action) => {
   switch (action.type) {
     case 'INCREMENT':
     case 'DECREMENT': {
-      const newScore = score(state.score, action);
+      const newScore = score(state, action);
       const scoreWithLimits = applyLimits(newScore, state.limits);
       return {
         ...state,
