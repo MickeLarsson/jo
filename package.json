@@ -8,7 +8,7 @@
     "test": "npm build && tape -r babel-register src/tests/*.js| faucet",
     "clean": "rimraf dist",
     "start": "node devServer.js",
-    "tunnel": "browser-sync start --proxy localhost:7770 --tunnel wesbos"
+    "release": "npm run clean && ODE_ENV=production webpack -p --config webpack.config.prod.js"
   },
   "repository": {
     "type": "git",

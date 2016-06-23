@@ -1,13 +1,11 @@
 var path = require('path');
 var webpack = require('webpack');
 
-var bourbon = require('node-bourbon').includePaths;
-var neat = require('node-neat').includePaths;
+var bourbon = require('bourbon-neat').includePaths;
 
 module.exports = {
-  devtool: 'source-map',
   entry: [
-    './src/reduxstagram'
+    './src/jo'
   ],
   output: {
     path: path.join(__dirname, 'dist'),
@@ -18,7 +16,7 @@ module.exports = {
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.DefinePlugin({
       'process.env': {
-        'NODE_ENV': "'production'"
+        'NODE_ENV': 'production'
       }
     }),
     new webpack.optimize.UglifyJsPlugin({
@@ -44,7 +42,7 @@ module.exports = {
     {
       test: /\.scss$/,
       include: path.join(__dirname, 'src'),
-      loader: `style!css!sass?includePaths[]=${bourbon, neat}`
+      loader: `style!css!sass?includePaths[]=${bourbon}`
     }
     ]
   }
