@@ -18,7 +18,6 @@ const mapDispatchToProps = (dispatch) =>
 
 const Game = (props) => {
   const left = getPerson(props.people, props.params[props.match.position.l]);
-  console.log(left);
   const right = getPerson(props.people, props.params[props.match.position.r]);
 
   const c = props.match.serve.initial === '' ? '' : 'hide';
@@ -28,9 +27,11 @@ const Game = (props) => {
       <div id="chooseServer" className={c}>
         <div className="wrap">
           <div className="text">
-            <h2><button onClick={() => props.setServer('l')}>{'\u261B'}</button> Decide who will begin to serve <button onClick={() => props.setServer('r')}>{'\u261A'}</button></h2>
+            <h2><button onClick={() => {
+              props.setServer('l');
+              props.setServerSet();
+            }}>{'\u261B'}</button> Decide who will begin to serve <button onClick={() => props.setServer('r')}>{'\u261A'}</button></h2>
             <p>Then press the button on your left</p>
-            <p>(or click on the hand)</p>
           </div>
         </div>
       </div>

@@ -33,3 +33,9 @@ export const setServer = (side) => {
     side
   }
 }
+
+export const setServerSet = () => {
+  return {
+    type: 'server/SERVER_SET'
+  }
+}
