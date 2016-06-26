@@ -5,7 +5,7 @@ var app = express();
 
 var isProduction = process.env.NODE_ENV === 'production';
 var port = 3000;//isProduction ? process.env.PORT : 3000;
-var root = path.resolve(__dirname, 'public');
+var root = path.resolve(__dirname, 'static');
 
 // We point to our static assets
 app.use(express.static(root));

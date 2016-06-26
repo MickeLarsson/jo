@@ -12,7 +12,7 @@ const defState = {
     current: 'one'
   },
   limits: {
-    gameGoesTo: 5,
+    gameGoesTo: 11,
     gamesToWin: 2
   },
   score: {
