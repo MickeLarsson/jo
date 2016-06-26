@@ -39,7 +39,7 @@ const Winner = (props) => {
           <span className="winner__score">{winner.score}</span>
         </div>
 
-        <img id="winner_gif" className="winner__gif" src="http://media4.giphy.com/media/l41lYCDgxP6OFBruE/giphy.gif" />
+        <img id="winner_gif" className="winner__gif" src="http://i.imgur.com/YCsSUI7.gif" />
 
         <div className="buttonWrap">
           <a href="/" className="button">New game</a>

@@ -8,7 +8,7 @@
     "test": "npm build && tape -r babel-register src/tests/*.js| faucet",
     "clean": "rimraf public/static",
     "start": "node devServer.js",
-    "release": "NODE_ENV=production webpack -p --config webpack.config.prod.js"
+    "release": "NODE_ENV=production webpack -p --config webpack.config.prod.js && ./release"
   },
   "repository": {
     "type": "git",
