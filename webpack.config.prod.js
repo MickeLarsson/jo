@@ -2,27 +2,33 @@ var path = require('path');
 var webpack = require('webpack');
 
 var bourbon = require('bourbon-neat').includePaths;
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: [
     './src/jo'
   ],
   output: {
-    path: path.join(__dirname, 'dist'),
-    filename: 'bundle.js',
-    publicPath: '/static/'
+    path: path.join(__dirname, 'public'),
+    filename: 'bundle.js'
   },
   plugins: [
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.DefinePlugin({
-      'process.env': {
-        'NODE_ENV': 'production'
+      'process.env':{
+        'NODE_ENV': JSON.stringify('production')
       }
     }),
     new webpack.optimize.UglifyJsPlugin({
       compressor: {
-        warnings: false
+        warnings: true
       }
+    }),
+    new HtmlWebpackPlugin({
+      title: 'Jo',
+      filename: 'index.html',
+      template: 'index_template.html',
+      appMountId: 'root',
     })
   ],
   module: {

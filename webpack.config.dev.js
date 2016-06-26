@@ -4,7 +4,7 @@ var webpack = require('webpack');
 var bourbon = require('bourbon-neat').includePaths;
 
 module.exports = {
-  devtool: 'source-map',
+  devtool: 'eval',
   entry: [
     'webpack-dev-server/client?http://localhost:7770',
     'webpack/hot/only-dev-server',
