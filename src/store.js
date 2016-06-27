@@ -8,7 +8,8 @@ import people from './data/people';
 
 import createSocketIoMiddleware from 'redux-socket.io';
 import io from 'socket.io-client';
-let socket = io('http://localhost:7771');
+// let socket = io('localhost:3000');
+let socket = io('http://clown.miklar.se:3000');
 let socketIoMiddleware = createSocketIoMiddleware(socket, 'server/');
 
 
@@ -46,5 +47,7 @@ if (module.hot) {
     store.replaceReducer(nextRootReducer);
   });
 }
+
+store.dispatch({type:'server/hello', data:'Hello!'});
 
 export default store;

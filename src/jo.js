@@ -10,14 +10,6 @@ import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import { Provider } from 'react-redux';
 import store, { history } from './store';
 
-// import io from 'socket.io-client';
-
-// let socket = io('http://localhost:7771');
-
-// socket.on('connect', () => {console.log('connect');});
-// socket.on('left', (data) => {console.log(data);});
-// socket.on('disconnect', () => {console.log('disconnect');});
-
 const router = (
 	<Provider store={store}>
 		<Router history={history}>

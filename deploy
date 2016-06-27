@@ -1,0 +1,10 @@
+#!/bin/bash
+
+scp -rp -i ~/.ssh/scaleway public/* root@163.172.135.124:./jo
+
+ssh -i ~/.ssh/scaleway root@163.172.135.124 << EOF
+cd jo
+docker stop jo && docker rm jo
+docker build -t miklar/jo .
+docker run -p 3000:3000 -d --name jo miklar/jo
+EOF

@@ -1,5 +1,7 @@
 release
 dist
 public/static
+public/node_modules
 node_modules
+buttons/node_modules
 .DS_Store
