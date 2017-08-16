@@ -1,3 +1,7 @@
+![JO](http://i.imgur.com/99IFqKX.gif)
+
 # JO
 
-Started out with code from [Wes Bos](http://wesbos.com/). Working on replacing it, but he is a great starting point if you want to learn React/Redux.
+Not much info here, ey? Give me a couple of days and there will be more.
+
+Design, css and joyful cheers by [Alexander Wallin](https://github.com/alexanderwallin). 
