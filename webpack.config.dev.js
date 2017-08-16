@@ -1,7 +1,8 @@
 var path = require('path');
 var webpack = require('webpack');
 
-var bourbon = require('bourbon-neat').includePaths;
+var bourbon = require('bourbon').includePaths;
+var neat = require('bourbon-neat').includePaths;
 
 module.exports = {
   devtool: 'eval',
@@ -36,8 +37,11 @@ module.exports = {
     {
       test: /\.scss$/,
       include: path.join(__dirname, 'src'),
-      loader: `style!css!sass?includePaths[]=${bourbon}`
+      loader: 'style!css!sass'
     }
     ]
+  },
+  sassLoader: {
+    includePaths: [bourbon, neat]
   }
 };

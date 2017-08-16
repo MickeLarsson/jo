@@ -229,7 +229,7 @@
     min-width: 400px;
     height: auto;
     @include transition(transform 1.5s cubic-bezier(0.415, 0.025, 0.000, 0.995));
-    @include transform(scale(0) rotate(0deg));
+    // @include transform(scale(0) rotate(0deg));
   }
 
   &.show {
@@ -239,7 +239,7 @@
       opacity: 1;
 
       .winner__gif {
-        @include transform(scale(1) rotate(3600deg));
+        // @include transform(scale(1) rotate(3600deg));
       }
     }
   }
@@ -259,4 +259,3 @@
     right: 0;
   }
 }
-
