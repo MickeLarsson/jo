@@ -12,14 +12,6 @@ import io from 'socket.io-client';
 let socket = io('http://163.172.135.124:3000');
 let socketIoMiddleware = createSocketIoMiddleware(socket, 'server/');
 
-const logger = (store) => (next) => (action) => {
-  if (action.type === 'BTN_LONG') {
-    store.dispatch(push('/'));
-  }
-
-  return next(action);
-}
-
 const enhancers = compose(
     applyMiddleware(socketIoMiddleware),
     window.devToolsExtension ? window.devToolsExtension() : (f) => f
