@@ -13,8 +13,8 @@ import store, { history } from './store';
 const router = (
 	<Provider store={store}>
 		<Router history={history}>
-			<Route path='/' component={App}></Route>
-      <Route path='/game/:one/:two' component={Game}></Route>
+			{/* <Route path='/' component={App}></Route> */}
+      <Route path='/' component={Game}></Route>
 		</Router>
 	</Provider>
 );

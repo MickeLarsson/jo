@@ -5,7 +5,6 @@ var io = require('socket.io')(server);
 var path = require('path');
 var fallback = require('express-history-api-fallback');
 
-
 var sockets = [];
 var isServeSet = false;
 
@@ -14,31 +13,37 @@ var root = path.resolve(__dirname, 'static');
 
 app.use(express.static(root));
 
-app.get('/green', function (req, res) {
-  if (isServeSet){
-    emit({ type: 'INCREMENT', side: 'l' });
-  }
-  else {
-    emit({ type: 'SET_SERVER', side: 'l' });
-    isServeSet = true;
-  }
-
-    res.send('Hello left!');
+app.get('/left', function (req, res) {
+  emit({ type: 'BTN_SINGLE', side: 'l' });
+  res.send('Hello left!');
 });
 
-app.get('/yellow', function (req, res) {
-  if (isServeSet) {
-    emit({ type: 'INCREMENT', side: 'r' });
-  }
-  else {
-    emit({ type: 'SET_SERVER', side: 'r' });
-    isServeSet = true;
-  }
-
-    res.send('Hello right!');
+app.get('/left-double', function (req, res) {
+  emit({ type: 'BTN_DOUBLE', side: 'l' });
+  res.send('Hello left!');
 });
 
-app.use(fallback('index.html', { root: root }));
+app.get('/left-long', function (req, res) {
+  emit({ type: 'BTN_LONG', side: 'l' });
+  res.send('Hello right!');
+});
+
+app.get('/right', function (req, res) {
+  emit({ type: 'BTN_SINGLE', side: 'r' });
+  res.send('Hello right!');
+});
+
+app.get('/right-double', function (req, res) {
+  emit({ type: 'BTN_DOUBLE', side: 'r' });
+  res.send('Hello right!');
+});
+
+app.get('/right-long', function (req, res) {
+  emit({ type: 'BTN_LONG', side: 'r' });
+  res.send('Hello right!');
+});
+
+app.use(fallback('index.html', { root }));
 
 const emit = (payload) => {
   console.log(`Emits ${payload.type}`);
@@ -46,7 +51,7 @@ const emit = (payload) => {
 };
 
 io.on('connection', function (socket) {
-  console.log("Socket connected: " + socket.id);
+  console.log('Socket connected: ' + socket.id);
   sockets.push(socket);
 });
 

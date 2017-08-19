@@ -2,7 +2,7 @@ const score = (state = {position: {l: '', r: ''}}, action) => {
 
 
   switch (action.type) {
-    case 'INCREMENT': {
+    case 'BTN_SINGLE': {
         const pl = state.position[action.side];
         console.log('pl ' + pl);
         return {
@@ -13,7 +13,7 @@ const score = (state = {position: {l: '', r: ''}}, action) => {
               }
             }
     }
-    case 'DECREMENT': {
+    case 'BTN_DOUBLE': {
         const pl = state.position[action.side];
         console.log('pl ' + pl);
       return {

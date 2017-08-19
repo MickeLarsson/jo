@@ -64,8 +64,18 @@ const getPlayerBySide = (side) => {
 
 const match = (state = defState, action) => {
   switch (action.type) {
-    case 'INCREMENT':
-    case 'DECREMENT': {
+    case 'BTN_SINGLE':
+    case 'BTN_DOUBLE': {
+      if (state.serve.initial === '') {
+        return {
+          ...state,
+          serve: {
+            ...state.serve,
+            initial: getPlayerBySide(action.side),
+            current: getPlayerBySide(action.side),
+          }
+        }
+      }
       const newScore = score(state, action);
       const scoreWithLimits = applyLimits(newScore, state.limits);
       return {
@@ -76,19 +86,10 @@ const match = (state = defState, action) => {
         position: getPositions(scoreWithLimits, state.position)
       };
     }
-    case 'SELECT_PLAYER': {
-      return selectPlayer(state, action)
-    }
-    case 'SET_SERVER': {
-      return {
-        ...state,
-        serve: {
-          ...state.serve,
-          initial: getPlayerBySide(action.side),
-          current: getPlayerBySide(action.side),
-        }
-      }
-    }
+    case 'SELECT_PLAYER':
+      return selectPlayer(state, action);
+    case 'BTN_LONG':
+      return defState;
     default:
       return state;
   }
