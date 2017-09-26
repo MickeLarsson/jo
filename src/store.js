@@ -8,8 +8,8 @@ import people from './data/people';
 
 import createSocketIoMiddleware from 'redux-socket.io';
 import io from 'socket.io-client';
-let socket = io('localhost:3000');
-// let socket = io('http://163.172.135.124:3000');
+// let socket = io('localhost:3000');
+let socket = io('http://163.172.135.124:3000');
 let socketIoMiddleware = createSocketIoMiddleware(socket, 'server/');
 
 const enhancers = compose(
