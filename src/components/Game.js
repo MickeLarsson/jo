@@ -38,7 +38,7 @@ const Game = (props) => {
 
       <div id="names" className="playersPresentation">
         <div className="name pL">{ props.match.serve.current === 'one' ? '\u261B' : ''}&nbsp;</div>
-        <div className="vs"><span>&nbsp;</span></div>
+        <div className="vs"><span>{ props.match.serve.number} </span></div>
         <div className="name pR">&nbsp;{ props.match.serve.current === 'two' ? '\u261A' : '' }</div>
       </div>
 

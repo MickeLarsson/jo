@@ -9,7 +9,8 @@ const defState = {
   winner: 'none',
   serve: {
     initial: '',
-    current: 'one'
+    current: 'one',
+    number: 1
   },
   limits: {
     gameGoesTo: 3,

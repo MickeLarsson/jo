@@ -13,10 +13,7 @@ const shouldFlipServer = (score, limits) => {
 
 const calcServer = (score, serve, limits) => {
   if (score.one.points === 0 && score.two.points === 0) {
-    //if ((score.one.games + score.two.games) % 2 === 0)
       return serve.initial;
-    // else
-    //   return otherPl(serve.initial);
   }
 
   return shouldFlipServer(score, limits)
@@ -24,11 +21,19 @@ const calcServer = (score, serve, limits) => {
                     : serve.current
 }
 
+const getNumber = (score, flipOnEveryPoint) => {
+  if (flipOnEveryPoint)
+    return 1;
+
+  return (score.one.points + score.two.points) % 2 + 1;
+}
+
 const getServer = (score, serve, limits) => {
   console.log(score);
   return {
     ...serve,
-    current: calcServer(score, serve, limits)
+    current: calcServer(score, serve, limits),
+    number: getNumber(score, shouldFlipOnEveryPoint(score.one.points, score.two.points, limits.gameGoesTo))
   }
 }
 

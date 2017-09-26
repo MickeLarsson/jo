@@ -1,7 +1,7 @@
 
 .playersPresentation {
   @include outer-container;
-  margin: 20px auto 10px;
+  margin: 80px auto 10px;
   line-height: 50px;
 
   .name {
@@ -35,13 +35,14 @@
 
 .scores {
   @include outer-container;
+  max-width: 1400px;
   margin: 60px auto 0;
 }
 
 .score {
   @include span-columns(20 of 40);
   position: relative;
-  height: 340px;
+  height: 440px;
 }
 
 .points,
@@ -65,7 +66,7 @@
 }
 
 .flip-leave {
-  top: -340px;
+  top: -440px;
 }
 
 .flip-leave.flip-leave-active {
@@ -82,23 +83,23 @@
   // padding: 20px 0 30px;
   background: #fefefe;
   color: #15232D;
-  font-size: 240px;
+  font-size: 340px;
   font-weight: bold;
   text-align: center;
-  line-height: 340px;
+  line-height: 440px;
 }
 
 .games {
   position: absolute;
   right: 62%;
   bottom: 0;
-  width: 150px;
-  height: 150px;
+  width: 200px;
+  height: 200px;
   overflow: hidden;
-  padding: 30px 40px;
+  padding: 40px 40px;
   background: #1C252B;
   color: #fafafa;
-  font-size: 80px;
+  font-size: 100px;
   text-align: center;
 }
 
