@@ -13,10 +13,10 @@ const shouldFlipServer = (score, limits) => {
 
 const calcServer = (score, serve, limits) => {
   if (score.one.points === 0 && score.two.points === 0) {
-    if ((score.one.games + score.two.games) % 2 === 0)
+    //if ((score.one.games + score.two.games) % 2 === 0)
       return serve.initial;
-    else
-      return otherPl(serve.initial);
+    // else
+    //   return otherPl(serve.initial);
   }
 
   return shouldFlipServer(score, limits)
