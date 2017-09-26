@@ -9,7 +9,8 @@
     "test": "npm build && tape -r babel-register src/tests/*.js| faucet",
     "clean": "rimraf public/static",
     "start": "node devServer.js",
-    "deploy": "rimraf public/node_modules && NODE_ENV=production webpack -p --config webpack.config.prod.js && ./deploy"
+    "prep": "rimraf public/node_modules && NODE_ENV=production webpack -p --config webpack.config.prod.js",
+    "deploy": "npm run prep && ./deploy"
   },
   "repository": {
     "type": "git",
