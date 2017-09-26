@@ -170,7 +170,7 @@
   right: 20px;
   bottom: 20px;
   left: 20px;
-  background: #fefefe;
+  background: #010101;
   z-index: 99999;
   text-align: center;
 
@@ -185,12 +185,17 @@
     display: none;
   }
 
+  p{
+    margin-top: -.75em;
+  }
+
   button {
     -webkit-appearance: none;
     outline: none;
     border: none;
     font-size: 1.25em;
     background: transparent;
+    color: #ddd;
   }
 }
 
