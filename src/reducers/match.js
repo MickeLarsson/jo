@@ -13,7 +13,7 @@ const defState = {
     number: 1
   },
   limits: {
-    gameGoesTo: 3,
+    gameGoesTo: 11,
     gamesToWin: 2
   },
   score: {
