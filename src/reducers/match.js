@@ -1,15 +1,17 @@
 import { combineReducers } from 'redux';
 import score from './score';
 import winning from './winning';
-import getServer from './serve';
+import { getServer } from './serve';
 import applyLimits from './applylimits';
 import getPositions from './player_position';
 
 const defState = {
   winner: 'none',
+  matchIsStarted: false,
+  initialServer: '',
   serve: {
     initial: '',
-    current: 'one',
+    current: 'p1',
     number: 1
   },
   limits: {
@@ -17,78 +19,74 @@ const defState = {
     gamesToWin: 2
   },
   score: {
-    one: {
+    p1: {
       games: 0,
       points: 0,
     },
-    two: {
+    p2: {
       games: 0,
       points: 0,
     }
   },
   players: {
-    one: {
+    p1: {
       id: null,
     },
-    two: {
+    p2: {
       id: null,
     }
   },
   position: {
-    l: 'one',
-    r: 'two'
+    l: 'p1',
+    r: 'p2'
   }
 };
 
 export const getDefState = () => defState;
 
-const selectPlayer = (state, {label, id}) => ({
-    ...state,
-    players: {
-      ...state.players,
-      [label]: {
-        ...state.players[label],
-        id
-      }
-    }
-})
+// const selectPlayer = (state, {label, id}) => ({
+//     ...state,
+//     players: {
+//       ...state.players,
+//       [label]: {
+//         ...state.players[label],
+//         id
+//       }
+//     }
+// })
 
 const getPlayerBySide = (side) => {
   if (side === 'l')
-    return 'one';
+    return 'p1';
 
   if (side === 'r')
-    return 'two';
+    return 'p2';
 
-  return 'one';
-}
+  return 'p1';
+};
 
 const match = (state = defState, action) => {
   switch (action.type) {
     case 'BTN_SINGLE':
-    case 'BTN_DOUBLE': {
-      if (state.serve.initial === '') {
+      if (state.initialServer === '') {
         return {
           ...state,
-          serve: {
-            ...state.serve,
-            initial: getPlayerBySide(action.side),
-            current: getPlayerBySide(action.side),
-          }
+          initialServer: getPlayerBySide(action.side),
         }
       }
+    case 'BTN_SINGLE':
+    case 'BTN_DOUBLE': {
       const newScore = score(state, action);
-      const scoreWithLimits = applyLimits(newScore, state.limits);
+      const limitedScore = applyLimits(newScore, state.limits);
       return {
         ...state,
-        score: scoreWithLimits,
-        serve: getServer(scoreWithLimits, state.serve, state.limits),
-        winner: winning(scoreWithLimits, state.limits),
-        position: getPositions(scoreWithLimits, state.position)
+        score: limitedScore,
+        winner: winning(limitedScore, state.limits),
+        position: getPositions(limitedScore, state.position)
       };
     }
-    case 'SELECT_PLAYER':
-      return selectPlayer(state, action);
+    // case 'SELECT_PLAYER':
+    //   return selectPlayer(state, action);
     case 'BTN_LONG':
       return defState;
     default:

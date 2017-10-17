@@ -1,21 +1,17 @@
 const score = (state = {position: {l: '', r: ''}}, action) => {
-
-
   switch (action.type) {
     case 'BTN_SINGLE': {
-        const pl = state.position[action.side];
-        console.log('pl ' + pl);
-        return {
-              ...state.score,
-              [pl]: {
-                ...state.score[pl],
-                points: state.score[pl].points + 1
-              }
-            }
+      const pl = state.position[action.side];
+      return {
+        ...state.score,
+        [pl]: {
+          ...state.score[pl],
+          points: state.score[pl].points + 1
+        }
+      }
     }
     case 'BTN_DOUBLE': {
-        const pl = state.position[action.side];
-        console.log('pl ' + pl);
+      const pl = state.position[action.side];
       return {
         ...state.score,
         [pl]: {

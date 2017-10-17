@@ -5,25 +5,25 @@ import { getDefState } from '../reducers/match';
 const defState = () => getDefState();
 
 test('Can increase score', (assert) => {
-  const expected = { one: { points: 1 } };
-  const actual = score(getDefState(), {type: 'INCREMENT', side: 'l'});
+  const expected = { p1: { points: 1 } };
+  const actual = score(getDefState(), {type: 'BTN_SINGLE', side: 'l'});
 
-  assert.deepEqual(actual.one.points, expected.one.points);
+  assert.deepEqual(actual.p1.points, expected.p1.points);
   assert.end();
 });
 
 test('Can increase score on new game', (assert) => {
    const state = {
       ...defState(),
-      one: {
+      p1: {
         games: 1,
         points: 0
       }
   };
 
-  const actual = score(defState(), {type: 'INCREMENT', side: 'r'});
+  const actual = score(defState(), {type: 'BTN_SINGLE', side: 'r'});
 
-  assert.deepEqual(actual.two.points, 1);
+  assert.deepEqual(actual.p2.points, 1);
   assert.end();
 });
 
@@ -32,17 +32,17 @@ test('Can decrease score', (assert) => {
       ...defState(),
       score: {
         ...defState().score,
-      one: {
+      p1: {
         games: 0,
         points: 2
       }
     }
   };
 
-  const expected = { one: { points: 1 } };
-  const actual = score(state, {type: 'DECREMENT', side: 'l'});
+  const expected = { p1: { points: 1 } };
+  const actual = score(state, {type: 'BTN_DOUBLE', side: 'l'});
 
-  assert.deepEqual(actual.one.points, expected.one.points);
+  assert.deepEqual(actual.p1.points, expected.p1.points);
   assert.end();
 });
 
@@ -51,16 +51,16 @@ test('Can not decrease to negative score', (assert) => {
       ...defState(),
       score: {
         ...defState().score,
-      one: {
+      p1: {
         games: 0,
         points: 0
       }
     }
   };
 
-  const expected = { one: { points: 0 } };
-  const actual = score(state, {type: 'DECREMENT', side: 'l'});
+  const expected = { p1: { points: 0 } };
+  const actual = score(state, {type: 'BTN_DOUBLE', side: 'l'});
 
-  assert.deepEqual(actual.one.points, expected.one.points);
+  assert.deepEqual(actual.p1.points, expected.p1.points);
   assert.end();
 });

@@ -1,40 +1,46 @@
-const otherPl = (pl) => pl === 'one' ? 'two' : 'one';
+const otherPl = (pl) => pl === 'p1' ? 'p2' : 'p1';
 
-const shouldFlipOnEveryPoint = (onePoints, twoPoints, gameGoesTo) =>
-  onePoints >= gameGoesTo - 1 && twoPoints >= gameGoesTo - 1;
+const shouldFlipOnEveryPoint = (score, limits) =>
+  score.p1.points >= limits.gameGoesTo - 1 && score.p2.points >= limits.gameGoesTo - 1;
 
-const flipOnEveryOtherPoint = (onePoints, twoPoints) =>
-  (onePoints + twoPoints) % 2 === 0;
+const totalPoints = score =>
+  score.p1.points + score.p2.points;
 
-const shouldFlipServer = (score, limits) => {
-  return shouldFlipOnEveryPoint(score.one.points, score.two.points, limits.gameGoesTo)
-         || flipOnEveryOtherPoint(score.one.points, score.two.points);
+const totalGames = score =>
+  score.p1.games + score.p2.games;
+
+const isEvenGame = score =>
+  (score.p1.games + score.p2.games) % 2 === 0;
+
+const whosTurnIsIt = (totPoints, initialServer, limits) => {
+  if (totPoints % 4 === 0)
+    return initialServer;
+  if (totPoints % 2 === 0)
+    return otherPl(initialServer);
+
+  return whosTurnIsIt(totPoints-1, initialServer, limits);
 }
 
-const calcServer = (score, serve, limits) => {
-  if (score.one.points === 0 && score.two.points === 0) {
-      return serve.initial;
-  }
+const getServerWithoutRegardsToGameNo = (score, initialServer, limits) => {
+  const totPoints = totalPoints(score);
 
-  return shouldFlipServer(score, limits)
-                    ? otherPl(serve.current)
-                    : serve.current
+  if (shouldFlipOnEveryPoint(score, limits))
+    return totPoints % 2 === 0 ? initialServer : otherPl(initialServer);
+
+  return whosTurnIsIt(totPoints, initialServer, limits);
 }
 
-const getNumber = (score, flipOnEveryPoint) => {
-  if (flipOnEveryPoint)
+const flipServerIfUnevenGameCount = (score, server) =>
+  totalGames(score) % 2 === 0 ? server : otherPl(server);
+
+export const getServer = ({ score, initialServer, limits }) => {
+  const server = getServerWithoutRegardsToGameNo(score, initialServer, limits);
+  return flipServerIfUnevenGameCount(score, server);
+}
+
+export const getNumber = ({ score, limits }) => {
+  if (shouldFlipOnEveryPoint(score, limits))
     return 1;
 
-  return (score.one.points + score.two.points) % 2 + 1;
+  return totalPoints(score) % 2 + 1;
 }
-
-const getServer = (score, serve, limits) => {
-  console.log(score);
-  return {
-    ...serve,
-    current: calcServer(score, serve, limits),
-    number: getNumber(score, shouldFlipOnEveryPoint(score.one.points, score.two.points, limits.gameGoesTo))
-  }
-}
-
-export default getServer;

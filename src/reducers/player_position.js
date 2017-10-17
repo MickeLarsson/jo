@@ -1,8 +1,8 @@
 const isNewGame = (score) => {
-  return (score.one.games + score.two.games >= 1) && (score.one.points + score.two.points === 0);
+  return (score.p1.games + score.p2.games >= 1) && (score.p1.points + score.p2.points === 0);
 }
 
-const otherPl = (pl) => pl === 'one' ? 'two' : 'one';
+const otherPl = (pl) => pl === 'p1' ? 'p2' : 'p1';
 
 const swapPositions = (pos) => {
   return {

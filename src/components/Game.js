@@ -7,10 +7,13 @@ import ScoreLeft from './scoreleft';
 import ScoreRight from './scoreright';
 import Winner from './winner';
 import { getPerson } from '../reducers/people';
+import { getServer, getNumber } from '../reducers/serve';
 
 const mapStateToProps = (state) => ({
   match: state.match,
-  people: state.people
+  people: state.people,
+  server: getServer(state.match),
+  serveNumber: getNumber(state.match),
 });
 
 const mapDispatchToProps = (dispatch) =>
@@ -20,7 +23,7 @@ const Game = (props) => {
   const left = getPerson(props.people, props.params[props.match.position.l]);
   const right = getPerson(props.people, props.params[props.match.position.r]);
 
-  const c = props.match.serve.initial === '' ? '' : 'hide';
+  const c = props.match.initialServer=== '' ? '' : 'hide';
 
   return (
     <div>
@@ -37,9 +40,9 @@ const Game = (props) => {
       </div>
 
       <div id="names" className="playersPresentation">
-        <div className="name pL">{ props.match.serve.current === 'one' ? '\u261B' : ''}&nbsp;</div>
-        <div className="vs"><span>{ props.match.serve.number} </span></div>
-        <div className="name pR">&nbsp;{ props.match.serve.current === 'two' ? '\u261A' : '' }</div>
+        <div className="name pL">{ props.server === 'p1' ? '\u261B' : ''}&nbsp;</div>
+        <div className="vs"><span>{ props.serveNumber} </span></div>
+        <div className="name pR">&nbsp;{ props.server === 'p2' ? '\u261A' : '' }</div>
       </div>
 
       <div className="scores">

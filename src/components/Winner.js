@@ -7,8 +7,8 @@ const getScore = (props) => {
       return '';
 
     const score = props.match.score;
-    const winner = props.match.winner || 'one';
-    const looser = props.match.winner === 'one' ? 'two' : 'one';
+    const winner = props.match.winner || 'p1';
+    const looser = props.match.winner === 'p1' ? 'p2' : 'p1';
     return score ? `${score[winner].games}-${score[looser].games}` : '';
 }
 

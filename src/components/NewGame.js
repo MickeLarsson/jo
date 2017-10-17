@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 
 const Player = ({match, side, p, selectPlayer}) => {
-  const otherLabel = side === 'one' ? 'two' : 'one';
+  const otherLabel = side === 'p1' ? 'p2' : 'p1';
   const isMirrorOfSelected = match.players[otherLabel].id === p.id;
   const isSelected = match.players[side].id === p.id;
 
@@ -33,16 +33,16 @@ const PlayerList = (props) => (
 );
 
 const NewGame = (props) => {
-  const gotPlayers = (props.match.players.one.id && props.match.players.two.id) || false;
+  const gotPlayers = (props.match.players.p1.id && props.match.players.p2.id) || false;
   return (
     <div id="app">
       <div className="container">
         <h2 className="textAlign--center">Select players</h2>
           <div className="playerLists">
-            <PlayerList id='pL' side='one' {...props } />
-            <PlayerList id='pR' side='two' {...props } />
+            <PlayerList id='pL' side='p1' {...props } />
+            <PlayerList id='pR' side='p2' {...props } />
           </div>
-          <Link disabled={!gotPlayers} to={`game/${props.match.players.one.id}/${props.match.players.two.id}`} className='button' >Let's Go!</Link>
+          <Link disabled={!gotPlayers} to={`game/${props.match.players.p1.id}/${props.match.players.p2.id}`} className='button' >Let's Go!</Link>
       </div>
     </div>
 )};

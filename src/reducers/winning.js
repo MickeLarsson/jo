@@ -1,10 +1,10 @@
 const winning = (score, limits) => {
-  if (score.one.games === limits.gamesToWin) {
-    return 'one';
+  if (score.p1.games === limits.gamesToWin) {
+    return 'p1';
   }
 
-  if (score.two.games === limits.gamesToWin) {
-    return 'two'
+  if (score.p2.games === limits.gamesToWin) {
+    return 'p2'
   }
 
   return 'none';

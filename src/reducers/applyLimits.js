@@ -1,4 +1,4 @@
-const otherPl = (pl) => pl === 'one' ? 'two' : 'one';
+const otherPl = (pl) => pl === 'p1' ? 'p2' : 'p1';
 
 const hasWonGame = (score, limits, pl) => {
   return score[pl].points >= limits.gameGoesTo
@@ -24,8 +24,8 @@ const limitScore = (score, limits, pl) => {
 }
 
 const applyLimits = (score, limits) => ({
-  one: limitScore(score, limits, 'one'),
-  two: limitScore(score, limits, 'two')
+  p1: limitScore(score, limits, 'p1'),
+  p2: limitScore(score, limits, 'p2')
 })
 
 export default applyLimits;

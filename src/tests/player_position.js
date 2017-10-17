@@ -10,15 +10,15 @@ test('Players switches side on new game', (assert) => {
     },
     score: {
       ...getDefState().score,
-      one: {
-        ...getDefState().score.one,
+      p1: {
+        ...getDefState().score.p1,
         points: 4
       }
     }
   }
-  const actual = match(state, {type: 'INCREMENT', side: 'l'});
+  const actual = match(state, {type: 'BTN_SINGLE', side: 'l'});
 
-  assert.deepEqual(actual.position.r, 'one');
+  assert.deepEqual(actual.position.r, 'p2');
   assert.end();
 });
 
@@ -31,14 +31,14 @@ test('Only switches side on new game', (assert) => {
     },
     score: {
       ...getDefState().score,
-      one: {
-        ...getDefState().score.one,
+      p1: {
+        ...getDefState().score.p1,
         points: 2
       }
     },
   }
-  const actual = match(state, {type: 'INCREMENT', side: 'l'});
+  const actual = match(state, {type: 'BTN_SINGLE', side: 'l'});
 
-  assert.deepEqual(actual.position.l, 'one');
+  assert.deepEqual(actual.position.l, 'p1');
   assert.end();
 });

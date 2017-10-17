@@ -8,8 +8,8 @@ import people from './data/people';
 
 import createSocketIoMiddleware from 'redux-socket.io';
 import io from 'socket.io-client';
-// let socket = io('localhost:3000');
-let socket = io('http://163.172.135.124:3000');
+let socket = io('localhost:3000');
+// let socket = io('http://163.172.135.124:3000');
 let socketIoMiddleware = createSocketIoMiddleware(socket, 'server/');
 
 const enhancers = compose(
@@ -34,8 +34,8 @@ const store = createStore(rootReducer, persistedPeople, enhancers);
 store.subscribe(() => {
   //push score to log server
   const score = store.getState().match.score;
-  const { one, two } = score;
-  console.log(`(${one.games}) ${one.points}:${two.points} (${two.games})`);
+  const { p1, p2 } = score;
+  console.log(`(${p1.games}) ${p1.points}:${p2.points} (${p2.games})`);
 });
 
 export const history = syncHistoryWithStore(browserHistory, store);
