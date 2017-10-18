@@ -1,7 +1,9 @@
-const score = (state = {position: {l: '', r: ''}}, action) => {
+import { getPlayer } from './player_position';
+
+const score = (state, action) => {
   switch (action.type) {
     case 'BTN_SINGLE': {
-      const pl = state.position[action.side];
+      const pl = getPlayer(action.side, state.score);
       return {
         ...state.score,
         [pl]: {
@@ -11,7 +13,7 @@ const score = (state = {position: {l: '', r: ''}}, action) => {
       }
     }
     case 'BTN_DOUBLE': {
-      const pl = state.position[action.side];
+      const pl = getPlayer(action.side, state.score);
       return {
         ...state.score,
         [pl]: {

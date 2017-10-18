@@ -1,14 +1,19 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import Points from './points';
 import Games from './games';
-import ScoreControls from './scorecontrols';
+import { getPlayerLeft } from '../reducers/player_position';
 
-const ScoreLeft = (props) => (
+const ScoreLeft = ({ games, points }) => (
   <div className="score scoreL">
-    <Games games={props.match.score[props.match.position.l].games} />
-    <Points points={props.match.score[props.match.position.l].points} />
-    <ScoreControls side='l' { ...props } />
+    <Games games={games} />
+    <Points points={points} />
   </div>
 );
 
-export default ScoreLeft;
+export default connect(
+  state => ({
+    games: state.match.score[getPlayerLeft(state.match)].games,
+    points: state.match.score[getPlayerLeft(state.match)].points
+})
+)(ScoreLeft);

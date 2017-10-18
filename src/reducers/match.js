@@ -35,10 +35,6 @@ const defState = {
     p2: {
       id: null,
     }
-  },
-  position: {
-    l: 'p1',
-    r: 'p2'
   }
 };
 
@@ -70,7 +66,6 @@ const match = (state = defState, action) => {
       return {
         ...state,
         score: limitedScore,
-        position: getPositions(limitedScore, state.position)
       };
     }
     // case 'SELECT_PLAYER':

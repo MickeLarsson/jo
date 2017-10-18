@@ -1,22 +1,14 @@
-const isNewGame = (score) => {
-  return (score.p1.games + score.p2.games >= 1) && (score.p1.points + score.p2.points === 0);
-}
-
 const otherPl = (pl) => pl === 'p1' ? 'p2' : 'p1';
 
-const swapPositions = (pos) => {
-  return {
-    ...pos,
-    l: otherPl(pos.l),
-    r: otherPl(pos.r)
-  }
-}
+export const getPlayerLeft = ({ score }) =>
+  score.p1.games + score.p2.games % 2 === 0
+    ? 'p1'
+    : 'p2';
 
-const getPositions = (score, position) => {
-  if (isNewGame(score))
-    return swapPositions(position);
+export const getPlayerRight = ({ score }) =>
+  otherPl(getPlayerLeft({ score }));
 
-  return position;
-}
-
-export default getPositions;
+export const getPlayer = (side, score) =>
+  side === 'l'
+    ? getPlayerLeft({ score })
+    : getPlayerRight({ score });
