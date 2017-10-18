@@ -44,17 +44,6 @@ const defState = {
 
 export const getDefState = () => defState;
 
-// const selectPlayer = (state, {label, id}) => ({
-//     ...state,
-//     players: {
-//       ...state.players,
-//       [label]: {
-//         ...state.players[label],
-//         id
-//       }
-//     }
-// })
-
 const getPlayerBySide = (side) => {
   if (side === 'l')
     return 'p1';
@@ -81,7 +70,6 @@ const match = (state = defState, action) => {
       return {
         ...state,
         score: limitedScore,
-        winner: winning(limitedScore, state.limits),
         position: getPositions(limitedScore, state.position)
       };
     }
