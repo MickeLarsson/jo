@@ -40,9 +40,9 @@ const Game = (props) => {
       </div>
 
       <div id="names" className="playersPresentation">
-        <div className="name pL">{ props.server === 'p1' ? '\u261B' : ''}&nbsp;</div>
-        <div className="vs"><span>{ props.serveNumber} </span></div>
-        <div className="name pR">&nbsp;{ props.server === 'p2' ? '\u261A' : '' }</div>
+        <div className="name pL">{ props.server === props.match.position.l ? '\u261B' : ''}&nbsp;</div>
+        <div className="vs"><span>{ props.serveNumber}</span></div>
+        <div className="name pR">&nbsp;{ props.server === props.match.position.r ? '\u261A' : '' }</div>
       </div>
 
       <div className="scores">
