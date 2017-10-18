@@ -15,10 +15,7 @@ const Game = (props) =>
     <div id="chooseServer" className={props.match.initialServer=== '' ? '' : 'hide'}>
       <div className="wrap">
         <div className="text">
-          <h2><button onClick={() => {
-            props.setServer('l');
-            props.setServerSet();
-          }}>{'\u261B'}</button> Decide who will begin to serve <button onClick={() => props.setServer('r')}>{'\u261A'}</button></h2>
+          <h2>{'\u261B'} Decide who will begin to serve {'\u261A'}</h2>
           <p>Then press the button on your left</p>
         </div>
       </div>
@@ -31,11 +28,11 @@ const Game = (props) =>
     </div>
 
     <div className="scores">
-      <ScoreLeft {...props} />
-      <ScoreRight {...props} />
+      <ScoreLeft />
+      <ScoreRight />
     </div>
 
-    <Winner {...props} />
+    <Winner />
   </div>);
 
 export default connect(

@@ -1,19 +1,8 @@
-import { combineReducers } from 'redux';
 import score from './score';
-import winning from './winning';
-import { getServer } from './serve';
 import applyLimits from './applylimits';
-import getPositions from './player_position';
 
 const defState = {
-  winner: 'none',
-  matchIsStarted: false,
   initialServer: '',
-  serve: {
-    initial: '',
-    current: 'p1',
-    number: 1
-  },
   limits: {
     gameGoesTo: 11,
     gamesToWin: 2
