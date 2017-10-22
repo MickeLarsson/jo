@@ -1,5 +1,6 @@
 import test from 'tape';
 import match, { getDefState } from '../reducers/match';
+import { getPlayer } from '../reducers/player_position';
 
 test('Players switches side on new game', (assert) => {
   const state = {
@@ -18,7 +19,7 @@ test('Players switches side on new game', (assert) => {
   }
   const actual = match(state, {type: 'BTN_SINGLE', side: 'l'});
 
-  assert.deepEqual(actual.position.r, 'p2');
+  assert.deepEqual(getPlayer('r', state.score), 'p2');
   assert.end();
 });
 
@@ -39,6 +40,6 @@ test('Only switches side on new game', (assert) => {
   }
   const actual = match(state, {type: 'BTN_SINGLE', side: 'l'});
 
-  assert.deepEqual(actual.position.l, 'p1');
+  assert.deepEqual(getPlayer('l', state.score), 'p1');
   assert.end();
 });

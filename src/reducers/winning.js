@@ -1,4 +1,4 @@
-const winning = ({match: {score, limits}}) => {
+const winning = ({ match: {score, limits} }) => {
   if (score.p1.games === limits.gamesToWin) {
     return 'p1';
   }

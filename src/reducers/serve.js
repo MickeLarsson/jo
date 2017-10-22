@@ -21,21 +21,19 @@ const whosTurnIsIt = (totPoints, initialServer, limits) => {
   return whosTurnIsIt(totPoints-1, initialServer, limits);
 }
 
-const getServerWithoutRegardsToGameNo = (score, initialServer, limits) => {
-  const totPoints = totalPoints(score);
-
-  if (shouldFlipOnEveryPoint(score, limits))
-    return totPoints % 2 === 0 ? initialServer : otherPl(initialServer);
-
-  return whosTurnIsIt(totPoints, initialServer, limits);
-}
-
-const flipServerIfUnevenGameCount = (score, server) =>
-  totalGames(score) % 2 === 0 ? server : otherPl(server);
+const getInitialServerForGame = (score, initialServerForMatch) =>
+  isEvenGame(score)
+    ? initialServerForMatch
+    : otherPl(initialServerForMatch);
 
 export const getServer = ({ score, initialServer, limits }) => {
-  const server = getServerWithoutRegardsToGameNo(score, initialServer, limits);
-  return flipServerIfUnevenGameCount(score, server);
+  const totPoints = totalPoints(score);
+  const initialServerForGame = getInitialServerForGame(score, initialServer);
+
+  if (shouldFlipOnEveryPoint(score, limits))
+    return totPoints % 2 === 0 ? initialServerForGame : otherPl(initialServerForGame);
+
+  return whosTurnIsIt(totPoints, initialServerForGame, limits);
 }
 
 export const getNumber = ({ score, limits }) => {
